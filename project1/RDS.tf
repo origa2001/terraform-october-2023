@@ -24,6 +24,10 @@ resource "aws_db_instance" "my_db_instance" {
   }
 }
 
+output "rds_endpoint" {
+  value = "${aws_db_instance.my_db_instance.endpoint}"
+}
+
 # resource "aws_security_group" "db_sg" {
 #   name        = "db_sg"
 #   description = "Security group for the database"
