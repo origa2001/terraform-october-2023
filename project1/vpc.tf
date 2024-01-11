@@ -4,6 +4,9 @@ provider "aws" {
 
 resource "aws_vpc" "main" {               #VPC
   cidr_block = "10.0.0.0/16"
+  enable_dns_support = true
+  enable_dns_hostnames = true
+
   tags = {
     Name = "group-1"
   }
@@ -158,7 +161,7 @@ resource "aws_security_group" "rds_sg" {        #security_groups for RDS
     from_port   = 3306
     to_port     = 3306
     protocol    = "tcp"
-    cidr_blocks = [aws_subnet.main4.cidr_block]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 

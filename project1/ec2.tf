@@ -40,7 +40,15 @@ resource "null_resource" "cluster" {
         "sudo cp -R wordpress/*  /var/www/html/"
 ]
   }
-}
+
+#   provisioner "remote-exec" {
+#     inline = [
+#       "bash script.sh",
+#     ]
+# }
+
+
+  }
 
 
 # data "aws_ami" "amzn-linux-2023-ami" {
