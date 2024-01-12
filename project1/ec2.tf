@@ -1,7 +1,25 @@
+
+data "aws_ami" "amazon-linux-2" {
+ most_recent = true
+
+
+ filter {
+   name   = "owner-alias"
+   values = ["amazon"]
+ }
+
+
+ filter {
+   name   = "name"
+   values = ["amzn2-ami-hvm*"]
+ }
+}
+
+
 resource "aws_instance" "example" {
-  ami           = "ami-011ab7c70f5b5170a"
-  instance_type = "t2.micro"
-  availability_zone = "us-east-2a"
+  ami           = data.aws_ami.amazon-linux-2.id
+  instance_type = var.instance_type
+  availability_zone = var.availability_zone_name1
     vpc_security_group_ids = [aws_security_group.sg-group1.id]
     key_name = aws_key_pair.deployer.key_name
     # user_data = file("project1.sh")
@@ -40,31 +58,10 @@ resource "null_resource" "cluster" {
         "sudo cp -R wordpress/*  /var/www/html/"
 ]
   }
-
-#   provisioner "remote-exec" {
-#     inline = [
-#       "bash script.sh",
-#     ]
-# }
+}
+  
 
 
-  }
-
-
-# data "aws_ami" "amzn-linux-2023-ami" {
-#   most_recent = true
-#   owners      = ["amazon"]
-
-#   filter {
-#     name   = "name"
-#     values = ["al2023-ami-2023.*-x86_64"]
-#   }
-
-#   filter {
-#     name   = "virtualization-type"
-#     values = ["hvm"]
-#   }
-# }
 
 resource "aws_key_pair" "deployer" {
   key_name   = "my-mac-key"

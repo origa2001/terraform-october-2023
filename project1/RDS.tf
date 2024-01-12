@@ -29,17 +29,6 @@ output "rds_endpoint" {
   value = "${aws_db_instance.my_db_instance.endpoint}"
 }
 
-# resource "aws_security_group" "db_sg" {
-#   name        = "db_sg"
-#   description = "Security group for the database"
-
-#   ingress {
-#     from_port = 3306
-#     to_port   = 3306
-#     protocol  = "tcp"
-#     security_group_ids = [aws_security_group.sg-group1.id]
-#   }
-# }
 
 
 

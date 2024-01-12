@@ -1,9 +1,9 @@
 provider "aws" {
-  region = "us-east-2"
+  region = var.region
 }
 
 resource "aws_vpc" "main" {               #VPC
-  cidr_block = "10.0.0.0/16"
+  cidr_block = var.cidr_block
   enable_dns_support = true
   enable_dns_hostnames = true
 
@@ -13,8 +13,8 @@ resource "aws_vpc" "main" {               #VPC
 }
 resource "aws_subnet" "main1" {            #public_subnet1
   vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.1.0/24"
-  availability_zone = "us-east-2a"
+  cidr_block = var.subnet1_cidr
+  availability_zone = var.availability_zone_name1
   map_public_ip_on_launch = true
 
   tags = {
@@ -23,8 +23,8 @@ resource "aws_subnet" "main1" {            #public_subnet1
 }
 resource "aws_subnet" "main2" {               #public_subnet2
   vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.2.0/24"
-  availability_zone = "us-east-2b"
+  cidr_block = var.subnet2_cidr
+  availability_zone = var.availability_zone_name2
 map_public_ip_on_launch = true
   tags = {
     Name = "Public-2"
@@ -32,8 +32,8 @@ map_public_ip_on_launch = true
 }
 resource "aws_subnet" "main3" {               #private_subnet1
   vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.3.0/24"
-  availability_zone = "us-east-2c"
+  cidr_block = var.subnet3_cidr
+  availability_zone = var.availability_zone_name3
 map_public_ip_on_launch = false
   tags = {
     Name = "Private1"
@@ -41,8 +41,8 @@ map_public_ip_on_launch = false
 }
 resource "aws_subnet" "main4" {                #private_subnet2
   vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.4.0/24"
-  availability_zone = "us-east-2b"
+  cidr_block = var.subnet4_cidr
+  availability_zone = var.availability_zone_name2
 map_public_ip_on_launch = false
   tags = {
     Name = "Private2"
