@@ -7,10 +7,10 @@ init:
 # plan:
 # 	$(TF_COMMAND) plan $(TF_OPTIONS)
 
-apply:
+a:
 	terraform apply --auto-approve
 
-destroy:
+d:
 	terraform destroy --auto-approve
 
 # .PHONY: init plan apply destroy

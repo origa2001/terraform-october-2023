@@ -25,7 +25,7 @@ resource "aws_instance" "example" {
     # user_data = file("project1.sh")
     subnet_id = aws_subnet.main1.id
   tags = {
-    Name = "group-2"
+    Name = "group-1"
   }
 }
 resource "null_resource" "cluster" {
@@ -47,7 +47,8 @@ resource "null_resource" "cluster" {
     # Bootstrap script called with private_ip of each node in the cluster
     inline = [
         "sudo yum update -y",
-        "sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2", 
+        "sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2=latest", 
+        "sudo amazon-linux-extras enable lamp-mariadb10.2-php7.2=latest",
         "sudo yum install mariadb-server -y",
         "sudo yum install httpd -y",
         "sudo systemctl start httpd",
@@ -71,4 +72,13 @@ resource "aws_key_pair" "deployer" {
 
 output instance {
     value = aws_instance.example.public_ip
+}
+
+
+terraform {
+  backend "s3" {
+    bucket = "origa2001"
+    key    = "project2/tfstatefile"
+    region = "us-east-2"
+  }
 }

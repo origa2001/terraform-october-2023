@@ -7,28 +7,28 @@ variable region {
 variable cidr_block {
     type = string
     description = "Provide cidr_block"   #
-    default = "10.0.0.0/16"
+    default = "172.20.0.0/16"
 }
 variable subnet1_cidr {
     type = string
     description = "Provide cidr_block"   #
-    default = "10.0.1.0/24"
+    default = "172.20.1.0/24"
 }
 variable subnet2_cidr {
     type = string
     description = "Provide cidr_block" #
-    default = "10.0.2.0/24"
+    default = "172.20.2.0/24"
 }
 variable subnet3_cidr {
     type = string
     description = "Provide cidr_block"  #
-    default = "10.0.3.0/24"
+    default = "172.20.3.0/24"
 }
 
 variable subnet4_cidr {
     type = string
     description = "Provide cidr_block"  #
-    default = "10.0.4.0/24"
+    default = "172.20.4.0/24"
 }
 
 variable instance_type {        #
